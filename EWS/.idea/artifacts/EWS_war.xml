@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="EWS:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="EWS.war">
+      <element id="artifact" artifact-name="EWS:war exploded" />
+    </root>
+  </artifact>
+</component>

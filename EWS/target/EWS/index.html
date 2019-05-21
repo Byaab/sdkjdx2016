@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>医疗设备预警系统</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <link rel="stylesheet" href="css/vcode.css"/>
+    <script type="text/javascript" src="layui/layui.all.js"></script>
+    <script type="text/javascript" src="js/vcode.js"></script>
+    <script type="text/javascript" src="jquery3.4.1/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            createCode(4);
+            $("#checkCode").click(function () {
+                createCode(4);
+            });
+        });
+        function login() {
+            var uname = $("#uname").val();
+            if(uname.length==0){
+                layer.tips("用户名不能为空！","#uname",{time:3000,tips:[2,"#FF0000"]});
+                return;
+            }
+            var upwd = $("#upwd").val();
+            if(upwd.length==0){
+                layer.tips("密码不能为空！","#upwd",{time:3000,tips:[2,"#FF0000"]});
+                return;
+            }if(upwd.length<6){
+                layer.tips("密码不能少于6位！","#upwd",{time:3000,tips:[2,"#FF0000"]});
+                return;
+            }
+            var vcode = $("#vcode").val();
+            if(vcode.toLowerCase()!=code.toLowerCase()){
+                layer.tips("验证码输入有误！","#vcode",{time:3000,tips:[1,"#FF0000"]});
+                return;
+            }
+            $.ajax({
+                url:"user/login.do",
+                data:{
+                    "uname":$("#uname").val(),
+                    "upwd":$("#upwd").val()
+                },
+                method:"post",
+//              /*回调函数*/
+                success:function (result) {
+                    layer.alert("登录"+result);
+                },
+                error:function () {
+                    layer.msg("请求服务器失败！");
+                }
+            });
+        }
+        function register() {
+            var r_uname = $("#r_uname").val();
+            if(r_uname.length==0){
+                layer.tips("用户名不能为空！","#r_uname",{time:3000,tips:[2,"#FF0000"]});
+                return;
+            }
+            var r_upwd = $("#r_upwd").val();
+            if(r_upwd.length==0){
+                layer.tips("密码不能为空！","#r_upwd",{time:3000,tips:[2,"#FF0000"]});
+                return;
+            }if(r_upwd.length<6){
+                layer.tips("密码不能少于6位！","#r_upwd",{time:3000,tips:[2,"#FF0000"]});
+                return;
+            }
+            var c_upwd = $("#c_upwd").val();
+            var r_upwd = $("#r_upwd").val();
+            if(c_upwd.length==0){
+                layer.tips("确认密码不能为空！","#c_upwd",{time:3000,tips:[2,"#FF0000"]});
+                return;
+            }if(!(c_upwd==r_upwd)){
+                layer.tips("确认密码错误！","#c_upwd",{time:3000,tips:[2,"#FF0000"]});
+                return;
+            }
+            var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+            var email =  jQuery("#email").val();
+            if(!reg.test(email)){
+                layer.tips("邮箱输入有误！","#email",{time:3000,tips:[2,"#FF0000"]});
+                return;
+            }
+            $.ajax({
+                url:"user/register.do",
+                data:{
+                    "r_uname":$("#r_uname").val(),
+                    "r_upwd":$("#r_upwd").val(),
+                    "email":$("#email").val()
+                },
+                method:"post",
+//              /*回调函数*/
+                success:function (result) {
+                    layer.alert("注册"+result);
+                },
+                error:function () {
+                    layer.msg("请求服务器失败！");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<!--div+css 布局-->
+<br><br><br><br>
+<center>
+    <div style="width: 45%">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>天津市总医院医疗设备检修预警系统</legend>
+        </fieldset>
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">用户登录</li>
+                <li>新用户注册</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">用户名</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="uname" name="uname" lay-verify="uname" autocomplete="off"
+                                       placeholder="请输入用户名" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">密码</label>
+                            <div class="layui-input-block">
+                                <input type="password" id="upwd" name="upwd" lay-verify="upwd" autocomplete="off"
+                                       placeholder="请输入密码" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">验证码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" size="20" id="vcode" name="vcode" lay-verify="vcode" autocomplete="off"
+                                       placeholder="请输入验证码" class="layui-input">
+                            </div>
+                            <span id="checkCode"></span>
+                        </div>
+                        <div align="right" class="layui-form-item">
+                            <a href="javascript:login()" class="layui-btn layui-btn-normal">登录</a>
+                            <a href="#" class="layui-btn layui-btn-danger">重置</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-tab-item">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">用户名</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="r_uname" name="r_uname" lay-verify="uname" autocomplete="off"
+                                       placeholder="请输入用户名" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">密码</label>
+                            <div class="layui-input-block">
+                                <input type="password" id="r_upwd" name="r_upwd" lay-verify="upwd" autocomplete="off"
+                                       placeholder="请输入密码" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">确认密码</label>
+                            <div class="layui-input-block">
+                                <input type="password" id="c_upwd" name="c_upwd" lay-verify="upwd" autocomplete="off"
+                                       placeholder="请输入确认密码" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Email</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="email" name="email" lay-verify="upwd" autocomplete="off"
+                                       placeholder="请输入邮箱" class="layui-input">
+                            </div>
+                        </div>
+                        <div align="right" class="layui-form-item">
+                            <a href="javascript:register()" class="layui-btn layui-btn-normal">注册</a>
+                            <a href="#" class="layui-btn layui-btn-danger">重置</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+</body>
+</html>

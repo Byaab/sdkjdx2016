@@ -1,0 +1,14 @@
+.code
+{
+    color:white;
+    font-size:22px;
+    border:0;
+    padding:2px 3px;
+    font-weight:bolder;
+    cursor:pointer;
+    width:90px;
+    height:60px;
+    text-align:center;
+    vertical-align:middle;
+    background-color:#000000;
+}
