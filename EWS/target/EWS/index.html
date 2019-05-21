@@ -69,8 +69,8 @@
             if(c_upwd.length==0){
                 layer.tips("确认密码不能为空！","#c_upwd",{time:3000,tips:[2,"#FF0000"]});
                 return;
-            }if(!(c_upwd==r_upwd)){
-                layer.tips("确认密码错误！","#c_upwd",{time:3000,tips:[2,"#FF0000"]});
+            }if(r_upwd!=c_upwd){
+                layer.tips("密码不能少于6位！","#c_upwd",{time:3000,tips:[2,"#FF0000"]});
                 return;
             }
             var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
@@ -82,8 +82,8 @@
             $.ajax({
                 url:"user/register.do",
                 data:{
-                    "r_uname":$("#r_uname").val(),
-                    "r_upwd":$("#r_upwd").val(),
+                    "uname":$("#r_uname").val(),
+                    "upwd":$("#r_upwd").val(),
                     "email":$("#email").val()
                 },
                 method:"post",

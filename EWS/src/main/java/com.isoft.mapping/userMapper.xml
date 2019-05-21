@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.isoft.mapping.userMapper">
+    <select id="login" parameterType="map" resultType="map">
+        SELECT * FROM tb_user WHERE uname=#{uname} and upwd=md5(#{upwd})
+    </select>
+    <insert id="register" parameterType="map">
+        INSERT INTO tb_user(id,uname,upwd,email,rloe,registerTime,lastLoginTime)
+        VALUE (null,#{uname},md5(#{upwd}),#{email},'employee',now(),now());
+    </insert>
+</mapper>

@@ -50,6 +50,18 @@
       <artifactId>spring-jdbc</artifactId>
       <version>5.1.7.RELEASE</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.5.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>2.0.1</version>
+    </dependency>
 
   </dependencies>
 
@@ -88,5 +100,15 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <resources>
+        <resource>
+            <directory>src/main/java</directory>
+            <includes>
+              <include>**/*.properties</include>
+              <include>**/*.xml</include>
+            </includes>
+          <filtering>true</filtering>
+        </resource>
+    </resources>
   </build>
 </project>
