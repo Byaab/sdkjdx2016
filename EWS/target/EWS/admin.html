@@ -13,6 +13,11 @@
         function loadAnalysisPage() {
             $("#mainFrame").load("analysis.html");
         }
+        function exit() {
+            layer.confirm("是否真的要退出系统？",{title:"退出提示",btn:["残忍离开","继续使用"]},function (index) {
+                window.location.href="index.html";
+            })
+        }
     </script>
 
 </head>
@@ -45,7 +50,7 @@
                     <dd><a href=""><span class="layui-icon layui-icon-password"></span> 个人中心</a> 修改密码</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退出</a></li>
+            <li class="layui-nav-item"><a href="javaScript:exit()">退出</a></li>
         </ul>
     </div>
 

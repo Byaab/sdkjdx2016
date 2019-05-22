@@ -13,6 +13,7 @@
         function loadUserData() {
             var table = layui.table;
             table.render({
+                toolbar:"#toolbar",
                 elem:"#userInfoList",
                 url:"user/findAllUser.do",
                 title:"用户信息表",
@@ -46,6 +47,16 @@
                             field:"lastLoginTime",
                             title:"最后一次登录时间",
                             align:"center"
+                        },
+                        {
+                            field:"",
+                            title:"操作",
+                            align:"center",
+                            templet:function (row) {
+                                var edit =  "<a href='' title='编辑'><span style='font-size: 20px' class='layui-icon layui-icon-edit'></span></a>"
+                                var del =  "<a href='' title='删除'><span style='font-size: 20px' class='layui-icon layui-icon-delete'></span></a>"
+                                return edit+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+del;
+                            }
                         }
                     ]
                 ]
@@ -71,6 +82,14 @@
 <div class="layui-elem-quote">
     用户管理功能
 </div>
+<script type="text/html" id="toolbar">
+    <a href="" class="layui-btn layui-btn-danger">添加用户</a>
+    <a href="" class="layui-btn layui-btn-warm">删除用户</a>
+    <input class="layui-input-block" type="text" placeholder="请输入要查询的信息">
+    <a href="" class="layui-btn layui-btn-warm">
+        <span class="layui-icon layui-icon-search"></span>
+    </a>
+</script>
 <table class="layui-table" id="userInfoList">
 
     <!--<tr>-->
