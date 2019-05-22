@@ -9,4 +9,10 @@
         INSERT INTO tb_user(id,uname,upwd,email,rloe,registerTime,lastLoginTime)
         VALUE (null,#{uname},md5(#{upwd}),#{email},'employee',now(),now());
     </insert>
+    <select id="findAllUser" parameterType="map" resultType="map">
+        select * from tb_user limit #{page},#{pageSize}
+    </select>
+    <select id="findUserCount" resultType="map">
+        SELECT count(*) as `count` from tb_user;
+    </select>
 </mapper>

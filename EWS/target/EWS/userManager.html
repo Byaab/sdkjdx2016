@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="layui/css/layui.css"/>
+    <script type="text/javascript" src="jquery3.4.1/jquery.js"></script>
+    <script type="text/javascript" src="layui/layui.all.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            loadUserData();
+        });
+        function loadUserData() {
+            var table = layui.table;
+            table.render({
+                elem:"#userInfoList",
+                url:"user/findAllUser.do",
+                title:"用户信息表",
+                limit:5,
+                page: true,
+                limits: [10, 20, 50, 100],
+                loading:true,
+                cols:[
+                    [
+                        {
+                            field:"uname",
+                            title:"用户名",
+                            align:"center"
+                        },
+                        {
+                            field:"rloe",
+                            title:"角色",
+                            align:"center"
+                        },
+                        {
+                            field:"email",
+                            title:"邮箱",
+                            align:"center"
+                        },
+                        {
+                            field:"registerTime",
+                            title:"注册时间",
+                            align:"center"
+                        },
+                        {
+                            field:"lastLoginTime",
+                            title:"最后一次登录时间",
+                            align:"center"
+                        }
+                    ]
+                ]
+            })
+            /*$.ajax({
+                url:"user/findAllUser.do",
+                data:{
+                    "page":0,
+                    "pageSize":10
+                },
+                method:"get",
+                success:function (result) {
+                    layer.msg(result);
+                },
+                error:function () {
+                    layer.msg("请求服务器失败!");
+                }
+            });*/
+        }
+    </script>
+</head>
+<body>
+<div class="layui-elem-quote">
+    用户管理功能
+</div>
+<table class="layui-table" id="userInfoList">
+
+    <!--<tr>-->
+    <!--<td><input type="checkbox">全选</td>-->
+    <!--<td>用户名</td>-->
+    <!--<td>Email</td>-->
+    <!--<td>角色</td>-->
+    <!--<td>注册时间</td>-->
+    <!--<td>最后一次登录时间</td>-->
+    <!--<td>操作</td>-->
+    <!--</tr>-->
+    <!--<tbody id="tb_body">-->
+
+    <!--</tbody>-->
+    <!--<tr>
+        <td><input type="checkbox" checked></td>
+        <td>张三</td>
+        <td>abc@163.com</td>
+        <td>管理员</td>
+        <td>2019-5-22</td>
+        <td>2019-5-23</td>
+        <td>
+            <a href="" title="删除"><span class="layui-icon layui-icon-delete"></span></a>
+            <a href="" title="修改"><span class="layui-icon layui-icon-edit"></span></a>
+        </td>
+    </tr>
+-->
+</table>
+</body>
+</html>
